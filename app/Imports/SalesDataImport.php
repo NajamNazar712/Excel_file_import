@@ -23,10 +23,7 @@ class SalesDataImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQ
     */
     public function model(array $row)
     {
-        // return new SalesDataDump([
-        //     //
-        // ]);
-        //dd($row);
+        
         return new SalesDataDump([
 
         'supervisor_code' => $row['supervisor_code'] ?? null,

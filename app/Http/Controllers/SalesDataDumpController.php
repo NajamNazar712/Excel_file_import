@@ -37,7 +37,6 @@ class SalesDataDumpController extends Controller
      */
     public function store(Request $request)
     {
-        //dd('test');
         $request->validate([
             'file' =>  'file|required'
         ]);
@@ -45,12 +44,10 @@ class SalesDataDumpController extends Controller
         try{
             Excel::import(new SalesDataImport, request()->file('file'));
             return back()->with('success', 'Succesfully Uploaded');
-            //return response()->json('uploaded');
 
         }catch(\Throwable $th){
 
             return back()->withError($th->getMessage());
-            //return response()->json($th->getMessage());
         }       
 
        
