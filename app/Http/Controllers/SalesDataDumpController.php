@@ -47,9 +47,13 @@ class SalesDataDumpController extends Controller
 
         }catch(\Throwable $th){
 
+            if($th->Failures()){
+                $failures = $th->Failures();
+                return redirect('/')->with('failures' ,$failures);
+                //return view('index', compact('failures'));
+            }
             return back()->withError($th->getMessage());
         }       
-
        
     }   
 

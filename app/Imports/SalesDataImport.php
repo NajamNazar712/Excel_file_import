@@ -9,12 +9,10 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+ini_set('max_execution_time', 18000);
 
 
-ini_set('max_execution_time', 18,000);
-
-
-class SalesDataImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQueue
+class SalesDataImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQueue,WithValidation
 {
     /**
     * @param array $row
@@ -89,4 +87,53 @@ class SalesDataImport implements ToModel,WithHeadingRow,WithChunkReading,ShouldQ
     {
         return 5000;
     }
+
+    public function rules(): array
+    {
+        return [
+            "town_name"=> "required",
+            "distributor_code_rd"=> "required",
+            'distributor_code' => 'required',
+            'distributor_name' => 'required',
+            'invoice_number' => 'required',
+            'order_booker_code' => 'required',
+            'order_booker_name' => 'required',
+            'outlet_code' => 'required',
+            'outlet_name' => 'required',
+            'area_type'  => 'required',
+            'pjp_name'  => 'required',
+            'pjp_code'  => 'required',
+            'channel'  => 'required',
+            'sub_channel'  => 'required',
+            'business_unit'  => 'required',
+            'category'  => 'required',
+            'brand'  => 'required',
+            'master_sku'  => 'required',
+            'sku_manufacturer_code'  => 'required',
+            'sku_code'  => 'required',
+            'sku_name'  => 'required',
+            'year'  => 'required', 
+            'month' => 'required',
+            'date'  => 'required',
+            'sales_ctn'  => 'required',
+            'sales_boxes'  => 'required',
+            'sales_units'  => 'required',
+            'ex_factory'  => 'required',
+            'tp_exc_gst'  => 'required',
+            'tp_inc_gst'  => 'required',
+            'trade_offer'  => 'required',
+            'distributor_promotion'  => 'required',
+            'net_sales'  => 'required',
+        ];
+    }
+    // public function customValidationMessages(){
+
+    //     return [
+    //         'town_name.required'=>"Town name required",
+    //         'distributor_code_rd.required' => "Distributor Code RD required",
+    //         'distributor_code.required' => 'Distributor Code required',
+    //         'distributor_name' =>  'Distributor Name required',
+
+    //     ];
+    // }
 }
